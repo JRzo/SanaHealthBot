@@ -1,0 +1,123 @@
+[
+  {
+    "symptom": "I have a sore throat and a fever.",
+    "triage_questions": [
+      "Is your fever over 103°F (39.4°C)?",
+      "Are you having trouble swallowing?",
+      "Do you have a severe headache or stiff neck?"
+    ],
+    "actionable_advice": "Your symptoms may indicate a common cold or a minor viral infection. Rest, drink plenty of fluids, and consider over-the-counter pain relievers if needed.",
+    "red_flag": false,
+    "emergency_response": ""
+  },
+  {
+    "symptom": "My lower back hurts and it feels stiff.",
+    "triage_questions": [
+      "Did you recently lift something heavy or have an injury?",
+      "Do you have a fever, numbness, or tingling in your legs?",
+      "Is the pain constant or does it come and go?"
+    ],
+    "actionable_advice": "For general back stiffness, try gentle stretches and apply a warm compress. Avoid heavy lifting and rest the area. If the pain worsens, consider seeing a doctor.",
+    "red_flag": false,
+    "emergency_response": ""
+  },
+  {
+    "symptom": "I have a sudden, sharp pain in my chest that goes to my arm.",
+    "triage_questions": [
+      "Is the pain accompanied by shortness of breath?",
+      "Do you feel dizzy, nauseous, or lightheaded?",
+      "Are you experiencing cold sweats or a racing heart?"
+    ],
+    "actionable_advice": "Based on your symptoms, it's possible you are experiencing a medical emergency. You should not wait for further suggestions.",
+    "red_flag": true,
+    "emergency_response": "This is a medical emergency. Please call 911 or your local emergency services immediately. Remain calm and do not drive yourself to the hospital."
+  },
+  {
+    "symptom": "I have a sudden, high fever and severe body aches.",
+    "triage_questions": [
+      "Is your fever over 102°F (38.9°C)?",
+      "Do you have a cough or sore throat?",
+      "Are you experiencing any nausea or vomiting?"
+    ],
+    "actionable_advice": "Your symptoms are consistent with the flu. Rest, stay hydrated, and use over-the-counter medication like ibuprofen or acetaminophen to manage the fever and aches. If symptoms worsen, contact a healthcare professional.",
+    "red_flag": false,
+    "emergency_response": ""
+  },
+  {
+    "symptom": "I have a persistent cough that won't go away.",
+    "triage_questions": [
+      "Is the cough dry or are you coughing up phlegm?",
+      "How long have you had this cough?",
+      "Do you have any shortness of breath or wheezing?"
+    ],
+    "actionable_advice": "A persistent cough can be caused by many things, from allergies to a lingering cold. Try drinking warm tea with honey. If it lasts more than a few weeks or you feel short of breath, please see a doctor.",
+    "red_flag": false,
+    "emergency_response": ""
+  },
+  {
+    "symptom": "I feel a sharp, stabbing pain in my right side, near my lower ribs.",
+    "triage_questions": [
+      "Does the pain come and go in waves?",
+      "Do you have a fever, nausea, or vomiting?",
+      "Have you noticed any blood in your urine?"
+    ],
+    "actionable_advice": "Pain in this area can have several causes. If the pain is severe or accompanied by other symptoms like fever or vomiting, it is important to seek medical attention. If you are experiencing no other symptoms, try to rest.",
+    "red_flag": true,
+    "emergency_response": "Pain in this area, especially when severe, can indicate a serious medical condition. Please call your doctor or go to the nearest urgent care center."
+  },
+  {
+    "symptom": "My ankle is swollen and bruised after I twisted it.",
+    "triage_questions": [
+      "Are you able to put weight on your foot?",
+      "Does the pain seem to be getting worse?",
+      "Did you hear or feel a 'pop' at the time of the injury?"
+    ],
+    "actionable_advice": "For a minor sprain, use the RICE method (Rest, Ice, Compression, Elevation). Keep weight off the ankle and apply a cold pack. If the swelling or pain doesn't improve after a few days, a doctor should be consulted.",
+    "red_flag": false,
+    "emergency_response": ""
+  },
+  {
+    "symptom": "My vision has suddenly become blurred and I feel dizzy.",
+    "triage_questions": [
+      "Did you have a head injury?",
+      "Are you experiencing a headache, numbness, or weakness on one side of your body?",
+      "Has this happened before?"
+    ],
+    "actionable_advice": "Sudden blurred vision and dizziness can be a sign of a serious medical issue. Please seek immediate professional medical attention.",
+    "red_flag": true,
+    "emergency_response": "Sudden blurred vision and dizziness, especially when accompanied by other symptoms, can be a sign of a stroke. This is a medical emergency. Please call 911 or your local emergency services immediately."
+  },
+  {
+    "symptom": "I have stomach pain and diarrhea.",
+    "triage_questions": [
+      "Is the pain severe, sharp, or cramping?",
+      "Have you had a fever or noticed blood in your stool?",
+      "Did you recently eat anything unusual or have food poisoning symptoms?"
+    ],
+    "actionable_advice": "For common stomach upset, it's best to rest and stay hydrated with water or electrolyte solutions. Avoid solid food for a few hours. If symptoms persist or worsen, please consult a doctor.",
+    "red_flag": false,
+    "emergency_response": ""
+  },
+  {
+    "symptom": "I have an itchy rash and swelling on my skin.",
+    "triage_questions": [
+      "Did you recently try a new food, soap, or cosmetic product?",
+      "Are you having any trouble breathing or swelling in your face or tongue?",
+      "Is the rash spreading rapidly or are there blisters?"
+    ],
+    "actionable_advice": "This could be an allergic reaction. Try to identify and avoid the trigger. An over-the-counter antihistamine may help with the itching. If it doesn't improve, see a dermatologist.",
+    "red_flag": false,
+    "emergency_response": "If you are experiencing difficulty breathing or swelling of the face or tongue, this could be a severe allergic reaction. Please call 911 or your local emergency services immediately."
+  },
+  {
+    "symptom": "I'm feeling very anxious and my heart is racing.",
+    "triage_questions": [
+      "Are you having trouble catching your breath or do you feel a sense of dread?",
+      "Is this a new feeling, or have you experienced this before?",
+      "Can you identify what might have triggered these feelings?"
+    ],
+    "actionable_advice": "These feelings may indicate an anxiety or panic attack. Try to focus on slow, deep breathing. Find a quiet space and focus on your surroundings. If these feelings are new or overwhelming, consider contacting a mental health professional or a crisis hotline.",
+    "red_flag": false,
+    "emergency_response": ""
+  }
+]
