@@ -7,6 +7,8 @@ import path from 'path';
 import dotenv from 'dotenv';
 import { fileURLToPath } from 'url';
 
+import {mainRoute} from './routes/mainRoute.ts'
+
 // Replicate __dirname and __filename for ES modules
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -25,6 +27,9 @@ const limiter = express_rate_limit({
   legacyHeaders: false, // Disable the `X-RateLimit-*` headers
 });
 app.use(limiter);
+
+// Routes
+app.use('/', mainRoute)
 
 // --- Server Startup ---
 const startServer = async () => {
