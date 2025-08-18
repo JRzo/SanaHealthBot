@@ -1,7 +1,7 @@
 <script  setup lang="ts">
-
+import ChatComponent from '@/components/ChatComponent.vue';
 </script>
 
 <template>
-    <h1>Home</h1>
+    <ChatComponent/>
 </template>
