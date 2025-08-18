@@ -306,7 +306,7 @@ footer {
 
 
 .cute-robot-v1 {
-  height: 40px;
+  height: 440px;
   display: flex;
   justify-content: center;
   align-items: center;

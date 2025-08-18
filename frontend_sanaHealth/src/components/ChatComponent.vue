@@ -1,5 +1,48 @@
 <script setup lang="ts">
 import SanaHealthWordComponent from '@/components/SanaHealthWordComponent.vue';
+import {useToast} from 'vue-toastification'
+import {ref } from 'vue';
+
+const response_user = ref("")
+
+const toast = useToast();
+
+const handleSubmitResponse = async () =>{
+
+
+    try{
+        const response_data = await fetch("https://localhost:5000/api/chat", {
+            method: "POST", 
+            headers: {
+                "Content-Type": "Application/json"
+            },
+            body: JSON.stringify(response_user)
+        });
+
+        if(response_data.ok){
+            // Successfully received a 2xx response
+            const data = await response_data.json(); // Correctly parse the JSON body
+            toast.success("Thank you!");
+            console.log(data);
+
+            
+        } else {
+            // Received a non-2xx response (e.g., 404, 500)
+            const errorData = await response_data.json(); // Still parse the JSON for error details
+            console.error("Error with response: ", errorData);
+            toast.error("Failed to submit.");
+        }
+    }
+    catch(err) {
+        console.log(err);
+    }
+
+    finally{
+        response_user.value = ""
+    }
+}
+
+
 </script>
 
 <template>
@@ -12,18 +55,18 @@ import SanaHealthWordComponent from '@/components/SanaHealthWordComponent.vue';
             <div id="response">
             </div>
             <div id="userBox">
-                 <form action="" method="POST">
+                 <form ref="form_Response" @submit.prevent="handleSubmitResponse">
                     <input type="text"
                     placeholder="Hello, I'm Sana. How are you feeling today?"
+                    v-model="response_user"
                     class="text-user"
                     name="textUser"
                     id="textUser"
                     required
                     >
-                    
+                    <button class="button-54" role="button">Enter</button>
                 </form>
                 <!-- HTML !-->
-                <button class="button-54" role="button">Enter</button>
 
 
             </div>
@@ -72,7 +115,7 @@ h4{
     display: flex;
     flex-flow: column wrap;
     width: 100%;
-    height: 45%;
+    height: 42%;
     align-items: center;
 
 }
@@ -88,6 +131,7 @@ h4{
     flex-flow: row wrap;
     justify-items: center;
     height: 100%;
+    border-radius: 50%;
     font-size: 100;
     width: 50%;
 }
@@ -98,6 +142,8 @@ h4{
     width:40em;
     height: 5em;
     box-shadow: rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+    margin: auto;
+    padding: auto;
 }
 
 /* Button */
