@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import mongoose from 'mongoose'
 
-import { userResponse } from '../models/userResponsesModel.ts';
+import { UserResponse } from '../models/userResponsesModel.ts';
 
 export const getIndex = async (req: Request, res:Response) =>{
     res.redirect('/')
@@ -20,6 +20,16 @@ export const chatResponse = async(req: Request, res: Response) =>{
 
     try{
         // Need to export the responses   
+        const newResponse = new UserResponse({
+            response: response
+        })
+
+        await newResponse.save();
+        return res.status(201).json({
+            message: "Response saved successfully",
+            data: newResponse
+        })
+        
     }
     catch(err){
         console.error(err);

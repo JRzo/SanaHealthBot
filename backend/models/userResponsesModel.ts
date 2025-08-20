@@ -1,14 +1,18 @@
-import mongoose from "mongoose";
+import mongoose, {Schema, Document} from "mongoose";
 
-const {Schema} = mongoose;
-
-export const userResponse = new Schema({
+export interface IUserResponse extends Document{
+    response: string,
+    date?: Date
+}
+const userResponse: Schema = new Schema({
     response: {
         type: String,
-        require
+        required: true
     },
     date: {
         type: Date,
-        default: Date.now()
+        default: Date.now
     }
-})
+});
+
+export const UserResponse = mongoose.model<IUserResponse>("UserResponse", userResponse);
