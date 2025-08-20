@@ -1,7 +1,7 @@
 import express from 'express';
-import bodyParser from 'body-parser';
+// Removed deprecated 'body-parser'
 import express_rate_limit from 'express-rate-limit';
-import cors from 'cors'; // <-- Import cors
+import cors from 'cors';
 import { connectDB } from "../backend/config/database.ts";
 import mongoose from 'mongoose';
 import path from 'path';
@@ -15,14 +15,14 @@ const __dirname = path.dirname(__filename);
 dotenv.config({ path: path.resolve(__dirname, './config/.env') });
 
 const app = express();
-app.use(bodyParser.json());
+// Replaced body-parser with express's built-in JSON parser
+app.use(express.json());
 
 // Use CORS middleware to allow cross-origin requests
 app.use(cors({
     origin: 'http://localhost:5173',
     methods: ['GET', 'POST', 'PUT', 'DELETE'], 
 }));
-
 
 const limiter = express_rate_limit({
     windowMs: 15 * 60 * 1000,
@@ -32,8 +32,8 @@ const limiter = express_rate_limit({
 });
 app.use(limiter);
 
-// Routes
-app.use('/', mainRoute);
+// Corrected route mounting path to match the API endpoint
+app.use('/api', mainRoute);
 
 // --- Server Startup ---
 const startServer = async () => {

@@ -2,6 +2,7 @@
 import SanaHealthWordComponent from '@/components/SanaHealthWordComponent.vue';
 import {useToast} from 'vue-toastification'
 import {ref } from 'vue';
+import ResponseComponent from '@/components/ResponseComponent.vue';
 
 const response_user = ref("")
 
@@ -11,12 +12,12 @@ const handleSubmitResponse = async () =>{
 
 
     try{
-        const response_data = await fetch("https://localhost:5000/api/chat", {
+        const response_data = await fetch("http://localhost:5000/api/chat", {
             method: "POST", 
             headers: {
                 "Content-Type": "Application/json"
             },
-            body: JSON.stringify(response_user)
+            body: JSON.stringify({response: response_user.value})
         });
 
         if(response_data.ok){
@@ -24,6 +25,7 @@ const handleSubmitResponse = async () =>{
             const data = await response_data.json(); // Correctly parse the JSON body
             toast.success("Thank you!");
             console.log(data);
+            console.log(response_user)
 
             
         } else {
@@ -35,6 +37,7 @@ const handleSubmitResponse = async () =>{
     }
     catch(err) {
         console.log(err);
+        toast.error("Failed to connect to the server."); 
     }
 
     finally{
@@ -53,6 +56,9 @@ const handleSubmitResponse = async () =>{
                 This is not medical advice. Consult a doctor for any health concerns or emergencies.
             </h4>
             <div id="response">
+                <!-- Response start -->
+                 <ResponseComponent />
+                <!-- Response end -->
             </div>
             <div id="userBox">
                  <form ref="form_Response" @submit.prevent="handleSubmitResponse">
@@ -94,7 +100,7 @@ body{
     flex-flow: row wrap;
     width: 55em;
     height:  50em;
-    border: 4px solid white;
+    border: 5px solid white;
     border-radius: 5%;
     box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
     margin-top: 2%;
@@ -115,15 +121,18 @@ h4{
     display: flex;
     flex-flow: column wrap;
     width: 100%;
-    height: 42%;
+    height: 13%;
     align-items: center;
-
 }
 
+
+#chatBar > #response{
+    height: 70%;
+}
 /* Response */
 #response{
     background: #1b263b1f;
-    border: 5px solid white;
+    border: 0.1px solid white;
 }
 
 #charBar #userBox{
@@ -134,6 +143,7 @@ h4{
     border-radius: 50%;
     font-size: 100;
     width: 50%;
+    border: 5px solid white;
 }
 
 #userBox input{
