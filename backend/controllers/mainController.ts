@@ -9,6 +9,8 @@ export const getIndex = async (req: Request, res:Response) =>{
 
 }
 
+export const get
+
 export const chatResponse = async(req: Request, res: Response) =>{
     console.log("We are chatting");
     console.log(req.body); // Log the request body first
