@@ -14,8 +14,10 @@
             <div class="block"></div>
             <p>Less waiting, more clarity.</p>
         </div>
-
+        
+        
     </div>
+
 </div>
 
 <!-- Robot -->
@@ -33,7 +35,9 @@
         <div class="robot-ear right"></div>
         <div class="robot-body"></div>
     </div>
-</div>    
+
+    
+</div>
     </body>
     
 
@@ -54,8 +58,7 @@ body, html {
 .container {
   width: 40%;
   height: 100vh;
-
-
+  flex-flow: column wrap;
   display: flex;
 
 
@@ -303,6 +306,12 @@ footer {
      bottom: 0px;
   }
 }
+
+.example-text{
+  display: flex;
+  flex-flow: column wrap;
+}
+
 
 
 .cute-robot-v1 {

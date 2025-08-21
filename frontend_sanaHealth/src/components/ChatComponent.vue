@@ -2,11 +2,19 @@
 import SanaHealthWordComponent from '@/components/SanaHealthWordComponent.vue';
 import {useToast} from 'vue-toastification'
 import {ref } from 'vue';
-import ResponseComponent from '@/components/ResponseComponent.vue';
 
 const response_user = ref("")
 
 const toast = useToast();
+
+// Creating h3 of users responses
+const newH3 = async (value: string) =>{
+    const newH3User = document.createElement('h3');
+    newH3User.classList.add("responseUser")
+    newH3User.textContent = value;
+
+    document.getElementById("response")?.appendChild(newH3User);
+}
 
 const handleSubmitResponse = async () =>{
 
@@ -27,6 +35,9 @@ const handleSubmitResponse = async () =>{
             console.log(data);
             console.log(response_user)
 
+            if(response_user.value != ""){
+                newH3(response_user.value);
+            }
             
         } else {
             // Received a non-2xx response (e.g., 404, 500)
@@ -34,6 +45,7 @@ const handleSubmitResponse = async () =>{
             console.error("Error with response: ", errorData);
             toast.error("Failed to submit.");
         }
+        
     }
     catch(err) {
         console.log(err);
@@ -52,13 +64,13 @@ const handleSubmitResponse = async () =>{
     <body>
         <SanaHealthWordComponent/>
         <div id="chatBar">
-                        <h4 class="warning">
+            <h4 class="warning">
                 This is not medical advice. Consult a doctor for any health concerns or emergencies.
             </h4>
             <div id="response">
-                <!-- Response start -->
-                 <ResponseComponent />
+                <h3 class="responseAI">Hello, I'm Sana. How are you feeling today?</h3>
                 <!-- Response end -->
+                 
             </div>
             <div id="userBox">
                  <form ref="form_Response" @submit.prevent="handleSubmitResponse">
@@ -128,12 +140,28 @@ h4{
 
 #chatBar > #response{
     height: 70%;
+    display: flex;
+    flex-flow: column wrap;
+    align-self: flex-start;
+    border: 1px solid white;
+    background: #1b263b1f;
+}
+
+.responseAI{
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 25px;
+    color: white;
+    margin: 2% 35% 2% 0%;
+    font-size: 25px;
+}
+
+.responseUser{
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 25px;
+    color: white;
+    margin: 2% 0% 2% 50%;
 }
 /* Response */
-#response{
-    background: #1b263b1f;
-    border: 0.1px solid white;
-}
 
 #charBar #userBox{
     display: flex;
