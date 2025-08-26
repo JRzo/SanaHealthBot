@@ -34,9 +34,8 @@ export const chatResponse = async(req: Request, res: Response) =>{
         await newResponse.save();
         return res.status(201).json({
             message: "Response saved successfully",
-            data: newResponse
+            data: newResponse  
         })
-        
     }
     catch(err){
         console.error("Error saving user response:", err);
@@ -47,5 +46,4 @@ export const chatResponse = async(req: Request, res: Response) =>{
         });
     }
 
-    res.send({ message: "Received your response successfully!" });
 }
