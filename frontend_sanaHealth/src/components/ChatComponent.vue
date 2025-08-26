@@ -103,184 +103,226 @@ const handleSubmitResponse = async () => {
         </div>
     </body>
 </template>
+  <style>
+        /* --- Global Styles --- */
+        :root {
+            --bg-color: #1b263b;
+            --chat-bg-color: #1b263b1f;
+            --border-color: rgba(255, 255, 255, 0.5);
+            --user-bubble-bg: #2b6cb0;
+            --ai-bubble-bg: #4a5568;
+            --text-color: #e0e1dd;
+            --warning-color: #ef4444;
+            --border-radius-lg: 20px;
+            --border-radius-sm: 5px;
+        }
 
-<style>
-/* CSS is largely untouched, but a few key things to note: */
-/* I've removed the direct h3 selectors in favor of more specific class-based styling */
-/* The layout and responsive design are still handled by your original CSS */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
 
-* {
-    background: #1b263b;
-}
+        /* --- Chat Interface Layout --- */
+        #chatBar {
+            display: flex;
+            flex-direction: column ;
+            width: 100%;
+            max-width: 55em; /* A good maximum width for desktop */
+            height: 90vh; /* Takes up most of the viewport height */
+            max-height: 50em; /* Prevents it from getting too tall */
+            border: 2px solid var(--border-color);
+            border-radius: var(--border-radius-lg);
+            box-shadow: rgba(0, 0, 0, 0.56) 0px 10px 10px 4px;
+            overflow: hidden; /* Important for the border-radius to work with inner elements */
+        }
 
-body {
-    display: flex;
-    flex: row wrap;
-    justify-content: center;
-}
+        h4.warning {
+            color: var(--warning-color);
+            font-weight: 500;
+            text-align: center;
+            padding: 0.5em 1em;
+        }
 
-#chatBar {
-    display: flex;
-    flex-flow: row wrap;
-    width: 55em;
-    height: 50em;
-    border: 5px solid white;
-    border-radius: 5%;
-    box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
-    margin-top: 2%;
-    justify-content: center;
-}
+        /* --- Chat Messages Container --- */
+        #response {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 1em;
+            overflow-y: auto;
+            background-color: var(--chat-bg-color);
+            border-bottom: 1px solid var(--border-color);
+        }
 
-h4 {
-    color: red;
-    font-weight: 300;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    margin-top: 1%;
-}
+        .responseAI, .responseUser {
+            font-size: clamp(14px, 4vw, 18px); /* More appropriate clamp values for mobile/desktop */
+            color: var(--text-color);
+            margin-bottom: 1em;
+            padding: 0.75em 1.25em;
+            border-radius: var(--border-radius-lg);
+            max-width: 80%; /* Adjusted max-width */
+            word-wrap: break-word; /* Prevents long words from overflowing */
+        }
 
+        .responseAI {
+            background-color: var(--ai-bubble-bg);
+            align-self: flex-start;
+            border-bottom-left-radius: var(--border-radius-sm);
+        }
 
-/* Divs */
+        .responseUser {
+            background-color: var(--user-bubble-bg);
+            align-self: flex-end;
+            border-bottom-right-radius: var(--border-radius-sm);
+        }
+        
+        /* Loading indicator styling for the AI response */
+        .loading-indicator {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 1em;
+            height: 5em;
+        }
+        .dot-flashing {
+            position: relative;
+            width: 10px;
+            height: 10px;
+            border-radius: 5px;
+            background-color: #e0e1dd;
+            color: #e0e1dd;
+            animation: dot-flashing 1s infinite linear alternate;
+            animation-delay: 0.5s;
+        }
+        .dot-flashing::before, .dot-flashing::after {
+            content: '';
+            display: inline-block;
+            position: absolute;
+            top: 0;
+            width: 10px;
+            height: 10px;
+            border-radius: 5px;
+            background-color: #e0e1dd;
+            color: #e0e1dd;
+            animation: dot-flashing 1s infinite alternate;
+        }
+        .dot-flashing::before {
+            left: -15px;
+            animation-delay: 0s;
+        }
+        .dot-flashing::after {
+            left: 15px;
+            width: 10px;
+            height: 10px;
+            border-radius: 5px;
+            background-color: #e0e1dd;
+            color: #e0e1dd;
+            animation: dot-flashing 1s infinite alternate;
+            animation-delay: 1s;
+        }
+        @keyframes dot-flashing {
+            0% { background-color: #e0e1dd; }
+            50%, 100% { background-color: #555866; }
+        }
 
-#chatBar>div {
-    display: flex;
-    flex-flow: column wrap;
-    width: 100%;
-    height: 13%;
-    align-items: center;
-}
+        /* --- User Input Area --- */
+        #userBox {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1em;
+            background-color: var(--bg-color);
+        }
 
+        #userBox form {
+            display: flex;
+            width: 100%;
+            gap: 1em;
+        }
 
-#chatBar>#response {
-    height: 70%;
-    display: flex;
-    flex-flow: column wrap;
-    align-self: flex-start;
-    border: 1px solid white;
-    background: #1b263b1f;
-    overflow-y: auto; /* Added for scrollable chat history */
-}
+        #userBox input {
+            flex-grow: 1;
+            color: var(--text-color);
+            padding: 1em;
+            height: 3em;
+            border: 1px solid var(--border-color);
+            border-radius: 25px;
+            background-color: #2d3748;
+            outline: none; /* Removes the focus outline */
+            transition: border-color 0.3s ease;
+        }
 
-.responseAI, .responseUser {
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    font-size: 25px;
-    color: white;
-    margin: 2% 35% 2% 0%;
-    font-size: 25px;
-}
+        #userBox input:focus {
+            border-color: var(--user-bubble-bg);
+        }
 
-.responseUser {
-    text-align: right;
-    margin: 2% 0% 2% 50%;
-}
+        /* --- Button Styling --- */
+        .button-54 {
+            --button-bg: #2b70f0;
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+            font-size: 16px;
+            text-transform: uppercase;
+            color: var(--text-color);
+            background-color: var(--button-bg);
+            border: none;
+            padding: 0.75em 1.5em;
+            position: relative;
+            user-select: none;
+            cursor: pointer;
+            border-radius: 25px;
+            transition: background-color 0.3s ease, transform 0.1s ease, box-shadow 0.2s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            outline: none;
+        }
 
-/* Response */
+        .button-54:hover {
+            background-color: #245ea3;
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.3);
+        }
 
-#charBar #userBox {
-    display: flex;
-    flex-flow: row wrap;
-    justify-items: center;
-    height: 100%;
-    border-radius: 50%;
-    font-size: 100;
-    width: 50%;
-    border: 5px solid white;
-}
+        .button-54:active {
+            transform: translateY(2px);
+            box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
 
-#userBox input {
-    text-align: center;
-    color: white;
-    width: 40em;
-    height: 5em;
-    box-shadow: rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
-    margin: auto;
-    padding: auto;
-}
-
-/* Button */
-.button-54 {
-    font-family: "Open Sans", sans-serif;
-    font-size: 16px;
-    letter-spacing: 2px;
-    margin-top: 2%;
-    text-decoration: none;
-    text-transform: uppercase;
-    color: #e0e1dd50;
-    cursor: pointer;
-    border: 3px solid #000000;
-    padding: 0.25em 0.5em;
-    box-shadow: 1px 1px 0px 0px, 2px 2px 0px 0px, 3px 3px 0px 0px, 4px 4px 0px 0px, 5px 5px 0px 0px;
-    position: relative;
-    user-select: none;
-    -webkit-user-select: none;
-    touch-action: manipulation;
-}
-
-.button-54:active {
-    box-shadow: 0px 0px 0px 0px;
-    top: 5px;
-    left: 5px;
-}
-
-@media (min-width: 768px) {
-    .button-54 {
-        padding: 0.25em 0.75em;
-    }
-}
-
-.loading-indicator {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 5em;
-}
-
-.dot-flashing {
-  position: relative;
-  width: 10px;
-  height: 10px;
-  border-radius: 5px;
-  background-color: #e0e1dd;
-  color: #e0e1dd;
-  animation: dot-flashing 1s infinite linear alternate;
-  animation-delay: 0.5s;
-}
-
-.dot-flashing::before, .dot-flashing::after {
-  content: '';
-  display: inline-block;
-  position: absolute;
-  top: 0;
-}
-
-.dot-flashing::before {
-  left: -15px;
-  width: 10px;
-  height: 10px;
-  border-radius: 5px;
-  background-color: #e0e1dd;
-  color: #e0e1dd;
-  animation: dot-flashing 1s infinite alternate;
-  animation-delay: 0s;
-}
-
-.dot-flashing::after {
-  left: 15px;
-  width: 10px;
-  height: 10px;
-  border-radius: 5px;
-  background-color: #e0e1dd;
-  color: #e0e1dd;
-  animation: dot-flashing 1s infinite alternate;
-  animation-delay: 1s;
-}
-
-@keyframes dot-flashing {
-  0% {
-    background-color: #e0e1dd;
-  }
-  50%,
-  100% {
-    background-color: #555866;
-  }
-}
-</style>
+        /* --- Responsive adjustments with media queries --- */
+        @media (max-width: 768px) {
+            body {
+                padding: 0.5em;
+            }
+            #chatBar {
+                height: 95vh;
+                max-height: 95vh;
+                border-radius: 10px;
+            }
+            .responseAI, .responseUser {
+                font-size: clamp(14px, 4.5vw, 16px);
+            }
+            #userBox {
+                padding: 0.75em;
+            }
+            #userBox input, .button-54 {
+                height: 2.5em;
+                font-size: 14px;
+                padding: 0.5em 1em;
+            }
+        }
+        @media (max-width: 480px) {
+            #userBox form {
+                flex-direction: column;
+                gap: 0.5em;
+            }
+            #userBox input {
+                width: 100%;
+            }
+            .button-54 {
+                width: 100%;
+            }
+        }
+    </style>

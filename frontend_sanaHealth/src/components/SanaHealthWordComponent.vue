@@ -61,15 +61,14 @@ body, html {
   flex-flow: column wrap;
   display: flex;
 
-
   .box {
     width: 300px;
-    height: 250px;
+    height: 225px;
     position: relative;
     display: flex;
     justify-content: center;
     flex-direction: column;
-
+    margin-left: 100%;
     .title {
       width: 100%;
       position: relative;
@@ -319,6 +318,7 @@ footer {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-right: 25%;
 }
 .cute-robot-v1 * {
   box-sizing: border-box;
