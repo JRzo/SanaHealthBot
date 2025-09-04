@@ -4,10 +4,16 @@ import {getIndex} from '../controllers/mainController.ts';
 import { chatResponse } from "../controllers/mainController.ts";
 import { getResponses } from "../controllers/mainController.ts";
 import { postAIChatBot } from "../controllers/aiBotController.ts";
+import { postLogin } from "../controllers/auth.ts";
+import { postSignup } from "../controllers/auth.ts";
+
+
 const router = express.Router();
 
 // Export the router directly instead of a function that returns it
 router.get('/', getIndex);
+router.post('/login', postLogin)
+router.post('/signup', postSignup)
 
 // Corrected line: Remove "/api"
 router.post("/chat", chatResponse);
